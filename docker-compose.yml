@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      # This pulls the API key from a .env file in the same directory
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    # For development, you can add a volume to see code changes live
+    # volumes:
+    #  - ./backend:/home/appuser/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80" # Maps your PC's port 3000 to the container's port 80
+    depends_on:
+      - backend
